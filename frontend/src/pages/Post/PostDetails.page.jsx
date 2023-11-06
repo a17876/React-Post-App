@@ -1,24 +1,38 @@
 import { Link } from "react-router-dom";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
-import { Button, Container } from "@mantine/core";
+import { Text, Title, TextInput, Button, Image } from '@mantine/core';
+import classes from './EmailBanner.module.css';
+import { useLoaderData } from "react-router-dom";
+
 
 function PostDetailsPage() {
+  const posts = useLoaderData();
+
   return (
-    <>
-      <Container>
-        <p>This page shows post details!</p>
-        <Button>
-          <Link to="/posts">Back to Posts</Link>
-        </Button>
-      </Container>
-    </>
+    <div className={classes.wrapper}>
+    <div className={classes.body}>
+      <Title className={classes.title}>{posts[1].title}</Title>
+      <Text fw={500} fz="lg" mb={5}>
+      {posts[1].category}
+      </Text>
+      <Text fz="sm" c="dimmed">
+        {posts[1].content}
+      </Text>
+
+      <div className={classes.controls}>
+        <Button className={classes.control}>Edit</Button>
+      </div>
+    </div>
+    <Image src={posts[1].image} className={classes.image} />
+  </div>
   );
 }
 
-export const postDetailsLoader = async ({ params }) => {
-  // do something with this
-  return null;
+export const postDetailsLoader = async () => {
+  const res = await axios.get(`${DOMAIN}/api/posts`);
+  console.log("Detail page ran!");
+  return res.data;
 };
 
 export default PostDetailsPage;

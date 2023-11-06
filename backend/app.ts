@@ -70,4 +70,5 @@ app.post("/api/posts", (req, res) => {
   res.status(200).json({ success: true });
 });
 
+// turning on the webserver. listening the request from diffrent browser.
 app.listen(port, () => console.log("Server is running"));
