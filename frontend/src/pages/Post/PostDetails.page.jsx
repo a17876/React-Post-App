@@ -26,7 +26,9 @@ function PostDetailsPage() {
       </Text>
 
       <div className={classes.controls}>
-        <Button className={classes.control}>Edit</Button>
+        <Button className={classes.control}>
+        <Link to={'edit'}>Edit</Link>
+        </Button>
       </div>
     </div>
     <Image src={posts[postId].image} className={classes.image} />
