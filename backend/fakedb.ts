@@ -32,13 +32,25 @@ export const posts = [
 ];
 
 export const addPost = (post: any) => {
-  //  Issues:
-  //  *     The request body contains the title, category, and image,
-  //  *     but the addPost function needs to add a unique id
-  //  *     and the id of the currently logged in user to the post.
   post.id = posts.length + 1;
   post.userId = 2;
   posts.push(post);
+};
+
+export const editPost = (updatedPost: any) => {
+  const postIndex = posts.findIndex(post => post.id === updatedPost.id);
+  
+  if (postIndex !== -1) {
+    posts[postIndex] = {
+      ...posts[postIndex],
+      id:updatedPost.id,
+      title: updatedPost.title,
+      category: updatedPost.category,
+      image: updatedPost.image,
+      content: updatedPost.content
+
+    };
+  }
 };
 
 export const verifyUser = (email: string, password: string) => {

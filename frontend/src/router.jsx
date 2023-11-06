@@ -3,6 +3,7 @@ import LoginPage from "./pages/Auth/Login.page";
 import Landing from "./pages/Landing/Landing.page";
 import NotFound from "./pages/Notfound/NotFound.page";
 import CreatePostPage from "./pages/Post/CreatePost.page";
+import EditPostPage from "./pages/Post/EditPost.page";
 import ProtectedRoute from "./services/ProtectedRoute";
 import useBoundStore from "./store/Store";
 import {
@@ -44,6 +45,15 @@ export const Router = () => {
               <CreatePostPage />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/posts/:id/edit"
+          element={
+            <ProtectedRoute isAllowed={!!authCheck}>
+              <EditPostPage />
+            </ProtectedRoute>
+          }
+          loader={postDetailsLoader}
         />
         <Route
           path="/posts"

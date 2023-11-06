@@ -9,6 +9,7 @@ import {
   addPost,
   posts,
   sleep,
+  editPost,
 } from "./fakedb";
 
 const port = 8085;
@@ -67,6 +68,12 @@ app.get("/api/posts/:id", (req, res) => {
 app.post("/api/posts", (req, res) => {
   const incomingPost = req.body;
   addPost(incomingPost);
+  res.status(200).json({ success: true });
+});
+
+app.post("/api/posts/edit", (req, res) => {
+  const incomingPost = req.body;
+  editPost(incomingPost);
   res.status(200).json({ success: true });
 });
 
