@@ -12,11 +12,15 @@ function PostDetailsPage() {
   const location = useLocation();
   const currentURL = location.pathname;
   const postId = parseInt(currentURL.split("/").pop(), 10) -1 ; 
-  
+  const jwtAccessToken = localStorage.getItem('jwt_access_token');
+  console.log(jwtAccessToken.value)
 
   return (
     <div className={classes.wrapper}>
     <div className={classes.body}>
+    <Text fw={500} fz="lg" mb={5}>
+      {posts[postId].category}
+      </Text>
       <Title className={classes.title}>{posts[postId].title}</Title>
       <Text fw={500} fz="lg" mb={5}>
       {posts[postId].category}

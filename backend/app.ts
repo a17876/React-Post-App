@@ -66,10 +66,18 @@ app.get("/api/posts/:id", (req, res) => {
  *     with an empty/incorrect payload (post)
  */
 app.post("/api/posts", (req, res) => {
-  const incomingPost = req.body;
-  addPost(incomingPost);
+  const token = req.headers && req.headers["authorization"]?.split(' ')[1]
+  if (token) {
+    const user = jwt.decode(token);
+    if (user && typeof user === 'object') {
+      const id = user.id;
+      const incomingPost = req.body;
+      addPost(incomingPost, id);
+    }
+  }
   res.status(200).json({ success: true });
 });
+
 
 app.post("/api/posts/edit", (req, res) => {
   const incomingPost = req.body;

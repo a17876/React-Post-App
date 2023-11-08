@@ -31,10 +31,11 @@ export const posts = [
   },
 ];
 
-export const addPost = (post: any) => {
+export const addPost = (post: any, id:string) => {
   post.id = posts.length + 1;
-  post.userId = 2;
+  post.userId = id;
   posts.push(post);
+  console.log(posts);
 };
 
 export const editPost = (updatedPost: any) => {
@@ -48,7 +49,6 @@ export const editPost = (updatedPost: any) => {
       category: updatedPost.category,
       image: updatedPost.image,
       content: updatedPost.content
-
     };
   }
 };
