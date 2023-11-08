@@ -7,18 +7,18 @@ import postDetailsLoader from "./PostDetails.page";
 
 function EditPostPage() {
   const navigate = useNavigate();
-  const posts = useLoaderData();
+  const data = useLoaderData();
   const currentURL = window.location.href;
   const postId = currentURL.match(/\/(\d+)\/edit/)[1] - 1;
 
 
   const form = useForm({
     initialValues: {
-      id: posts[postId].id,
-      title: posts[postId].title,
-      category: posts[postId].category,
-      image: posts[postId].image,
-      content: posts[postId].content,
+      id: data.post.id,
+      title: data.post.title,
+      category: data.post.category,
+      image: data.post.image,
+      content: data.post.content,
     },
     fields: {
       id: { hidden: true }, // ID 필드를 숨김 처리

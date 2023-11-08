@@ -52,10 +52,21 @@ app.get("/api/posts", async (req, res) => {
 
 // ⭐️ TODO: Implement this yourself
 app.get("/api/posts/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  console.log(id)
+  let response = {}
+  const index = parseInt(req.params.id) - 1;
+ 
+  const user = findUserById(posts[index].userId);
+  if (user) {
+    const emailParts = user.email.split("@");
+    const author = emailParts[0];
+    response = {
+      author,
+      post: posts[index],
+    }
+  }
   // The line below should be fixed.
-  res.json(posts[id]);
+  res.json(response);
+
 });
 
 /**

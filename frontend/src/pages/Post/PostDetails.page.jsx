@@ -8,7 +8,7 @@ import { useLoaderData, useLocation  } from "react-router-dom";
 
 
 function PostDetailsPage() {
-  const post = useLoaderData();
+  const data = useLoaderData();
   const location = useLocation();
   const currentURL = location.pathname;
   const postId = parseInt(currentURL.split("/").pop(), 10) -1 ; 
@@ -17,14 +17,14 @@ function PostDetailsPage() {
     <div className={classes.wrapper}>
     <div className={classes.body}>
     <Text fw={500} fz="lg" mb={5}>
-      {post.category}
+      {data.author}
       </Text>
-      <Title className={classes.title}>{post.title}</Title>
+      <Title className={classes.title}>{data.post.title}</Title>
       <Text fw={500} fz="lg" mb={5}>
-      {post.category}
+      {data.post.category}
       </Text>
       <Text fz="sm" c="dimmed">
-        {post.content}
+        {data.post.content}
       </Text>
 
       <div className={classes.controls}>
@@ -33,7 +33,7 @@ function PostDetailsPage() {
         </Button>
       </div>
     </div>
-    <Image src={post.image} className={classes.image} />
+    <Image src={data.post.image} className={classes.image} />
   </div>
   );
 }
