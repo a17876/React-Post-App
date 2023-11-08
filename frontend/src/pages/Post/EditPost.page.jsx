@@ -5,11 +5,12 @@ import { useForm } from "@mantine/form";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import postDetailsLoader from "./PostDetails.page";
 
+
 function EditPostPage() {
   const navigate = useNavigate();
   const data = useLoaderData();
-  const currentURL = window.location.href;
-  const postId = currentURL.match(/\/(\d+)\/edit/)[1] - 1;
+  // const currentURL = window.location.href;
+  // const postId = currentURL.match(/\/(\d+)\/edit/)[1] - 1;
 
 
   const form = useForm({
@@ -35,6 +36,7 @@ function EditPostPage() {
   };
 
   return (
+   
     <Box maw={300} mx="auto">
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <TextInput
@@ -63,8 +65,12 @@ function EditPostPage() {
         <Group position="right" mt="md">
           <Button type="submit">Submit</Button>
         </Group>
+    
       </form>
+     
     </Box>
+ 
+  
   );
 }
 

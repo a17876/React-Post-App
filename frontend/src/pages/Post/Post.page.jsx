@@ -1,11 +1,15 @@
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
-import { SimpleGrid, Container } from "@mantine/core";
+import { SimpleGrid, Container, Loader  } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const PostPage = () => {
   const posts = useLoaderData();
+  if (!posts) {
+    return <Loader color="blue" />;
+  }
+
   return (
     <Container>
       <SimpleGrid cols={3}>

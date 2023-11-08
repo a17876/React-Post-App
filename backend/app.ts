@@ -18,7 +18,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 // TODO: Obviously use a more secure signing key than "secret"
 app.post("/api/user/login", (req, res) => {
   try {
@@ -46,15 +45,16 @@ app.post("/api/user/validation", (req, res) => {
 });
 
 app.get("/api/posts", async (req, res) => {
-  // Sleep delay goes here
-  res.json(posts);
+  sleep(1000).then(() => {
+    res.json(posts);
+  });
 });
 
 // ⭐️ TODO: Implement this yourself
 app.get("/api/posts/:id", (req, res) => {
-  let response = {}
+  let response = {};
   const index = parseInt(req.params.id) - 1;
- 
+
   const user = findUserById(posts[index].userId);
   if (user) {
     const emailParts = user.email.split("@");
@@ -62,11 +62,9 @@ app.get("/api/posts/:id", (req, res) => {
     response = {
       author,
       post: posts[index],
-    }
+    };
   }
-  // The line below should be fixed.
   res.json(response);
-
 });
 
 /**
@@ -97,7 +95,6 @@ app.post("/api/posts/edit", (req, res) => {
   editPost(incomingPost);
   res.status(200).json({ success: true });
 });
-
 
 // turning on the webserver. listening the request from diffrent browser.
 app.listen(port, () => console.log("Server is running"));
