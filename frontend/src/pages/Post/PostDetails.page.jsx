@@ -8,25 +8,23 @@ import { useLoaderData, useLocation  } from "react-router-dom";
 
 
 function PostDetailsPage() {
-  const posts = useLoaderData();
+  const post = useLoaderData();
   const location = useLocation();
   const currentURL = location.pathname;
   const postId = parseInt(currentURL.split("/").pop(), 10) -1 ; 
-  const jwtAccessToken = localStorage.getItem('jwt_access_token');
-  console.log(jwtAccessToken.value)
 
   return (
     <div className={classes.wrapper}>
     <div className={classes.body}>
     <Text fw={500} fz="lg" mb={5}>
-      {posts[postId].category}
+      {post.category}
       </Text>
-      <Title className={classes.title}>{posts[postId].title}</Title>
+      <Title className={classes.title}>{post.title}</Title>
       <Text fw={500} fz="lg" mb={5}>
-      {posts[postId].category}
+      {post.category}
       </Text>
       <Text fz="sm" c="dimmed">
-        {posts[postId].content}
+        {post.content}
       </Text>
 
       <div className={classes.controls}>
@@ -35,13 +33,13 @@ function PostDetailsPage() {
         </Button>
       </div>
     </div>
-    <Image src={posts[postId].image} className={classes.image} />
+    <Image src={post.image} className={classes.image} />
   </div>
   );
 }
 
-export const postDetailsLoader = async () => {
-  const res = await axios.get(`${DOMAIN}/api/posts`);
+export const postDetailsLoader = async ({ params }) => {
+  const res = await axios.get(`${DOMAIN}/api/posts/${params.id}`);
   console.log("Detail page ran!");
   return res.data;
 };

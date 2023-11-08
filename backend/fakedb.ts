@@ -4,7 +4,7 @@ export interface IDecodedUser {
   id: number;
 }
 
-const users = [
+export const users = [
   { id: 1, email: "john123@gmail.com", password: "123" },
   { id: 2, email: "sandra123@gmail.com", password: "123" },
 ];
@@ -35,7 +35,6 @@ export const addPost = (post: any, id:string) => {
   post.id = posts.length + 1;
   post.userId = id;
   posts.push(post);
-  console.log(posts);
 };
 
 export const editPost = (updatedPost: any) => {

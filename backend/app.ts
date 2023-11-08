@@ -10,12 +10,14 @@ import {
   posts,
   sleep,
   editPost,
+  users,
 } from "./fakedb";
 
 const port = 8085;
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 // TODO: Obviously use a more secure signing key than "secret"
 app.post("/api/user/login", (req, res) => {
@@ -50,9 +52,10 @@ app.get("/api/posts", async (req, res) => {
 
 // ⭐️ TODO: Implement this yourself
 app.get("/api/posts/:id", (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
+  console.log(id)
   // The line below should be fixed.
-  res.json(posts[0]);
+  res.json(posts[id]);
 });
 
 /**
@@ -66,10 +69,10 @@ app.get("/api/posts/:id", (req, res) => {
  *     with an empty/incorrect payload (post)
  */
 app.post("/api/posts", (req, res) => {
-  const token = req.headers && req.headers["authorization"]?.split(' ')[1]
+  const token = req.headers && req.headers["authorization"]?.split(" ")[1];
   if (token) {
     const user = jwt.decode(token);
-    if (user && typeof user === 'object') {
+    if (user && typeof user === "object") {
       const id = user.id;
       const incomingPost = req.body;
       addPost(incomingPost, id);
@@ -78,12 +81,12 @@ app.post("/api/posts", (req, res) => {
   res.status(200).json({ success: true });
 });
 
-
 app.post("/api/posts/edit", (req, res) => {
   const incomingPost = req.body;
   editPost(incomingPost);
   res.status(200).json({ success: true });
 });
+
 
 // turning on the webserver. listening the request from diffrent browser.
 app.listen(port, () => console.log("Server is running"));
