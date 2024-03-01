@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { DrawerContext } from "../../Contexts/drawerContext";
 import { NavLink } from "react-router-dom";
+import { ActionToggle } from "./ActionToggle";
 
 export default () => {
   const { logoutService, user } = useBoundStore((state) => state);
@@ -22,6 +23,7 @@ export default () => {
         <NavLink onClick={handleClick} className={classes.link} to="/login">
           Login
         </NavLink>,
+        <ActionToggle />
       ]
     : [
         <NavLink onClick={handleClick} className={classes.link} end to="/posts">
